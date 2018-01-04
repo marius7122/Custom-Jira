@@ -1,0 +1,53 @@
+#sidebar {
+    height: 100%;
+    width: 4%;
+
+    background: #323232;
+    color: #fff;
+    text-align: center;
+
+    box-sizing: border-box;
+    position: relative;
+    height: 100vh;
+
+    display: inline-block;
+
+/*    bottom: 0;
+    left: 0;*/
+}
+
+
+#sidebar  *{
+	margin-top: 10px;
+	width: 100%;
+}
+
+#sidebar button{
+	margin-top: 0;
+	border: none;
+	background: none;
+	color: #fff;
+	font-size: 1.8em;
+	border-radius: 0;
+	outline: none;
+	padding: 0;
+	height: 50px;
+}
+
+#sidebar button:hover{
+	background: #1c1c1c;
+}
+
+#sidebar button:active{
+	background: black;
+}
+
+#sidebar #collapse-button{
+	margin-bottom: 20px;
+}
+
+#auth{
+	position: absolute;
+	bottom: 0;
+	padding: 0;
+}

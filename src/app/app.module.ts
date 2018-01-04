@@ -4,12 +4,16 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { ColumnsComponent } from './columns/columns.component';
+import { ColumnComponent } from './column/column.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent
+    SidebarComponent,
+    ColumnsComponent,
+    ColumnComponent
   ],
   imports: [
     BrowserModule
