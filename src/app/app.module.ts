@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ColumnsComponent } from './columns/columns.component';
 import { ColumnComponent } from './column/column.component';
+import { TaskComponent } from './task/task.component';
+import { DataProviderService } from './dataProvider.service';
 
 
 @NgModule({
@@ -13,12 +15,13 @@ import { ColumnComponent } from './column/column.component';
     AppComponent,
     SidebarComponent,
     ColumnsComponent,
-    ColumnComponent
+    ColumnComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [DataProviderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -31,7 +31,11 @@
 	border-radius: 0;
 	outline: none;
 	padding: 0;
-	height: 50px;
+	height: 80px;
+}
+
+#sidebar button span{
+	font-size: 0.6em;
 }
 
 #sidebar button:hover{
@@ -50,4 +54,8 @@
 	position: absolute;
 	bottom: 0;
 	padding: 0;
+}
+
+#home-button{
+	color: red;
 }
