@@ -13,10 +13,40 @@ div.coloana{
 }
 
 hr{
-	margin: 0;
+	margin: 5px;
+}
+
+.coloana hr {
+    border: 0;
+    border-bottom: 1px dashed #ccc;
+    background: #999;
+}
+
+.task hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
 
 h5{
 	text-transform: capitalize;
 	font-weight: 600;
+}
+
+h6{
+	text-transform: capitalize;
+	font-weight: 600;
+}
+
+.task{
+	min-height: 50px;
+
+	margin: 3px;
+
+	border: 1px solid black;
+}
+
+.description{
+	margin-bottom: 10px;
 }

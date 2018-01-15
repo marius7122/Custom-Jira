@@ -12,3 +12,4 @@ export const mockTasks: task[] = [
 	{column: 8, title: "Issue 412", description: "file foo9.exe is not found in the folder", priority: 1},
 	{column: 9, title: "Issue 413", description: "file foo10.exe is not found in the folder", priority: 1}
 ];
+// {status: "build", ....}

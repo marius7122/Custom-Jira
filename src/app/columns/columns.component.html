@@ -1,6 +1,11 @@
 
-<div class="coloana" *ngFor="let title of titles">
-	<h5>{{title}}</h5>
+<div class="coloana" *ngFor="let column of columns">
+	<h5>{{column.displayName}}</h5>
 	<hr>
-	<app-task></app-task>
+
+	<div class="task" *ngFor="let task of column.tasks">
+		<h6>{{task.title}}</h6>
+		<hr>
+		<div class="description">{{task.description}}</div>
+	</div>
 </div>

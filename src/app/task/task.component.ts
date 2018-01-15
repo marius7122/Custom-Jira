@@ -12,8 +12,6 @@ export class TaskComponent implements OnInit {
   constructor() { }
 
   columnNumber: number;
-  allTasks: task[] = mockTasks;
-  myTasks: task[];
 
   ngOnInit(){
   	

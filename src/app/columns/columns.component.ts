@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Titles } from './column-names';
+import { DataProviderService } from '../dataProvider.service'
 
 @Component({
   selector: 'app-columns',
   templateUrl: './columns.component.html',
-  styleUrls: ['./columns.component.css']
+  styleUrls: ['./columns.component.css'],
 })
 
 export class ColumnsComponent implements OnInit {
+	service = new DataProviderService;	
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(dataService: DataProviderService) { 
+  	this.service = dataService;
   }
 
-  titles:string[] = Titles;
+  columns = [];
+
+  ngOnInit() {
+  	//cer informatiile despre coloane
+    this.columns = this.service.fillColumns();
+    console.log(this.columns);
+  }
 
 }
