@@ -45,8 +45,15 @@ export class DataProviderService{
 		//adaug taskurile corespunzatoare fiecarei coloane
 		for(let task of this.tasks)
 		{
-			let obj = {title: task.name, description: task.description};
+			//  	!!!in cazul in care se modifica structura task-ului modifica si aici
+			let obj = {title: task.name, description: task.description, owner: task.owner, importance: task.importance};
 			columns[dict[task.status]].tasks.push(obj);
+		}
+
+		//sortez taskurile fiecarei coloane dupa prioritate
+		for(let i in columns)
+		{
+			columns[i].tasks.sort((t1,t2) => {return t1.importance - t2.importance});
 		}
 
 		return columns;

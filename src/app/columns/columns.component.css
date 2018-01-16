@@ -6,7 +6,7 @@ div.coloana{
 	position: relative;
 	float: left;
 	width: 10.45%;
-	min-height: 200px;
+	min-height: 50px;
 	border: 2px dashed #323232;
 	margin: 0.27%;
 	/*text-align: center;*/
@@ -49,4 +49,25 @@ h6{
 
 .description{
 	margin-bottom: 10px;
+}
+
+.owner{
+	font-style: italic;
+}
+
+div .green{
+	background-color: rgb(18, 202, 1);
+	color: white;
+}
+div .yellow{
+	background-color: yellow;
+	
+}
+div .red{
+	background-color: red;
+	color: white;
+}
+div .black{
+	background-color: black;
+	color: white;
 }

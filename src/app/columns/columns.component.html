@@ -3,9 +3,12 @@
 	<h5>{{column.displayName}}</h5>
 	<hr>
 
-	<div class="task" *ngFor="let task of column.tasks">
-		<h6>{{task.title}}</h6>
-		<hr>
-		<div class="description">{{task.description}}</div>
+	<div *ngFor="let task of column.tasks">
+		<div class = "task" [ngClass] = "[(task.importance == 1) ? 'black':'', (task.importance == 2) ? 'red':'', (task.importance == 3) ? 'yellow':'', (task.importance == 4) ? 'green':'']">
+			<h6>{{task.title}}</h6>
+			<hr>
+			<div class="description">{{task.description}}</div>
+			<div class="owner">Created by {{task.owner}}</div>
+		</div>
 	</div>
 </div>
