@@ -7,6 +7,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ColumnsComponent } from './columns/columns.component';
 import { TaskComponent } from './task/task.component';
 import { DataProviderService } from './dataProvider.service';
+import { DragulaModule } from 'ng2-dragula';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { DataProviderService } from './dataProvider.service';
     TaskComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    DragulaModule
   ],
   providers: [DataProviderService],
   bootstrap: [AppComponent]

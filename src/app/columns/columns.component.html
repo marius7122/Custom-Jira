@@ -1,5 +1,5 @@
 
-<div class="coloana" *ngFor="let column of columns">
+<div class="container coloana" [dragula]="'another-bag'" *ngFor="let column of columns">
 	<h5>{{column.displayName}}</h5>
 	<hr>
 

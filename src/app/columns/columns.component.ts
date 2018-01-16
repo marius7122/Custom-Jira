@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataProviderService } from '../dataProvider.service'
+import { DragulaService } from 'dragula'
 
 @Component({
   selector: 'app-columns',
