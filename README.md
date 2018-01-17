@@ -1,3 +1,7 @@
+#Dependencies
+- ng2-dragula: "npm install ng2-dragula --save"
+
+
 # JiraSoftware
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.2.
