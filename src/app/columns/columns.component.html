@@ -1,14 +1,18 @@
 
-<div class="container coloana" [dragula]="'another-bag'" *ngFor="let column of columns">
+
+<div class="container coloana" *ngFor="let column of columns">
 	<h5>{{column.displayName}}</h5>
 	<hr>
 
-	<div *ngFor="let task of column.tasks">
-		<div class = "task" [ngClass] = "[(task.importance == 1) ? 'black':'', (task.importance == 2) ? 'red':'', (task.importance == 3) ? 'yellow':'', (task.importance == 4) ? 'green':'']">
-			<h6>{{task.title}}</h6>
-			<hr>
-			<div class="description">{{task.description}}</div>
-			<div class="owner">Created by {{task.owner}}</div>
+	<!-- taskuri -->
+	<div class="tasks"  id ="{{column.name}}" [dragula] = "'issue-bag'" [dragulaModel] = "column.tasks">
+		<div *ngFor="let task of column.tasks">
+			<div class = "task" [ngClass] = "[(task.importance == 1) ? 'black':'', (task.importance == 2) ? 'red':'', (task.importance == 3) ? 'yellow':'', (task.importance == 4) ? 'green':'']">
+				<h6>{{task.title}}</h6>
+				<hr>
+				<div class="description">{{task.description}}</div>
+				<div class="owner">Created by {{task.owner}}</div>
+			</div>
 		</div>
-	</div>
+	</div>	
 </div>
