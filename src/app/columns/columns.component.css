@@ -12,6 +12,13 @@ div.coloana{
 	/*text-align: center;*/
 
 	padding-bottom: 5px;
+	max-height: 96vh;
+
+	overflow-y: auto;
+}
+
+.tasks{
+	max-height: 95vh;
 }
 
 hr{
