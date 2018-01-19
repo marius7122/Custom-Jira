@@ -1,5 +1,6 @@
-#Dependencies
-- ng2-dragula: "npm install ng2-dragula --save"
+# Dependencies
+
+- ng2-dragula: "npm install ng2-dragula --save"  
 
 
 # JiraSoftware

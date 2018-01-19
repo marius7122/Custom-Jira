@@ -9,13 +9,16 @@ import { DragulaService } from 'ng2-dragula/components/dragula.provider';
 })
 
 export class ColumnsComponent implements OnInit {
-	service = new DataProviderService;	
+
+  service = new DataProviderService;
+  dragula = new DragulaService;
 
   constructor(dataService: DataProviderService, dragula: DragulaService) { 
     this.service = dataService;
+    this.dragula = dragula;
 
     dragula.drop.subscribe((value) => {
-      this.onDrop(value);
+       this.onDrop(value);
     });
   }
 
@@ -30,26 +33,40 @@ export class ColumnsComponent implements OnInit {
     for (let i in this.columns)
     {
       this.dict[this.columns[i].name] = i;
+
+      this.columns[i].bagName = this.columns[i].name + "-bag";
     }
 
 
     console.log(this.columns);
   }
 
+  sortColumn(id)
+  {
+    let index = this.dict[id];
 
-  onDrop(args){
-    //imi trebuie args[2]
-    //args[2] = coloana unde s-a facut drag
-    let id = args[2].id;
-    let idIndex = this.dict[id];
-
-    console.log(this.columns[idIndex]);
-
-    //sortez taskurile
-    this.columns[idIndex].tasks.sort((t1,t2) => {return t1.importance - t2.importance});
-
+    this.columns[index].tasks.sort((t1,t2) => {return t1.importance - t2.importance});
   }
 
+  onDrop(args){
 
+    if(args[2].id == args[3].id)
+    {
+      let id = args[2].id;
+
+      this.sortColumn(id);
+
+      this.dragula.find('issue-bag').drake.cancel(true);
+    }
+    else
+    {
+      //imi trebuie args[2]
+      //args[2] = coloana unde s-a facut drag
+      let id = args[2].id;
+
+      //sortez taskurile
+      this.sortColumn(id);
+    }
+  }
 
 }
