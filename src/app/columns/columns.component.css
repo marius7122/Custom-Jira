@@ -10,6 +10,8 @@ div.coloana{
 	border: 2px dashed #323232;
 	margin: 0.27%;
 	/*text-align: center;*/
+
+	padding-bottom: 5px;
 }
 
 hr{
@@ -74,6 +76,16 @@ div .black{
 
 .tasks{
 	min-height: 50px;
+}
+
+.container{
+	padding-left:5px;
+	padding-right: 5px;
+}
+
+#done .task{
+	background: white !important;
+	color: black !important;
 }
 
 /* DRAGULA CSS */
