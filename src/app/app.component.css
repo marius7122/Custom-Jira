@@ -1,9 +1,12 @@
 #content{
-	position: absolute;
+	/* position: absolute; */
 	/*top: 20px;
 	left: 50px;*/
+
+	
+
 	display: inline-block;
-	margin-left: 20px;
+	margin-left: 5%;
 	margin-top: 20px;
 	width: 95%;
 }
