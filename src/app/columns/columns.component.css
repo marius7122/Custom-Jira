@@ -14,7 +14,7 @@ div.coloana{
 	padding-bottom: 5px;
 	max-height: 96vh;
 
-	overflow-y: auto;
+	overflow-y: auto; 
 }
 
 .tasks{
