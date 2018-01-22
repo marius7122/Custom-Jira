@@ -118,3 +118,21 @@ div .black{
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
 	filter: alpha(opacity=20);
   }
+
+
+/* Scrollbar CSS */
+.min-scrollbar::-webkit-scrollbar-track
+{
+	background-color: rgb(214, 214, 214);
+}
+
+.min-scrollbar::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+.min-scrollbar::-webkit-scrollbar-thumb
+{
+	background-color: #909090;
+}
