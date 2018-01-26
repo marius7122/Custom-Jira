@@ -3,13 +3,16 @@ import { task } from './task/task'
 import { mockColumns } from './mock/columns'
 import { mockTasks } from './mock/task'
 
+import {Issue} from './models/issue';
+//import http
+
 @Injectable()
 export class DataProviderService{
 
 	constructor() { }
 
 	columnNames = [];
-	tasks = [];
+	tasks = new Array<Issue>();
 
 	getColumns()
 	{
@@ -19,6 +22,11 @@ export class DataProviderService{
 	getTasks()
 	{
 		this.tasks = mockTasks;
+		// this.http.get('localhost:1231231/issues').then(response => {
+		// 	this.tasks = response;
+		// })
+		
+
 	}
 
 	fillColumns()

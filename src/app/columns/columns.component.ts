@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DataProviderService } from '../dataProvider.service'
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
+//models
+import { Issue } from '../models/issue'
+
 @Component({
   selector: 'app-columns',
   templateUrl: './columns.component.html',
@@ -13,7 +16,7 @@ export class ColumnsComponent implements OnInit {
   service = new DataProviderService;
   dragula = new DragulaService;
   drake:any;
-
+  
   constructor(dataService: DataProviderService, dragula: DragulaService) { 
     this.service = dataService;
     this.dragula = dragula;
