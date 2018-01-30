@@ -3,30 +3,40 @@ import { task } from './task/task'
 import { mockColumns } from './mock/columns'
 import { mockTasks } from './mock/task'
 
-import {Issue} from './models/issue';
-//import http
+import { Issue } from './models/issue';
+// import { Http, Response, HttpModule } from '@angular/http';
+import { HttpClient } from '@angular/common/http'
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataProviderService{
 
-	constructor() { }
+	constructor(private http: HttpClient) {
+	}
 
 	columnNames = [];
 	tasks = new Array<Issue>();
 
-	getColumns()
+	APIUrl = 'http://localhost:61411';
+
+	getColumns() 
 	{
 		this.columnNames = mockColumns;
 	}
 
+	getTaskData()
+	{
+		this.http.get(this.APIUrl + '/issues').subscribe((res:Response) => {
+			this.tasks.subscribe = res;
+			console.log(res);
+		});
+
+		console.log(this.tasks);
+	}
+
 	getTasks()
 	{
-		this.tasks = mockTasks;
-		// this.http.get('localhost:1231231/issues').then(response => {
-		// 	this.tasks = response;
-		// })
-		
-
+		let tasks =this.getTaskData();
 	}
 
 	fillColumns()

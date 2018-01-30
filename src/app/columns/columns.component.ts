@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataProviderService } from '../dataProvider.service'
+import { DataProviderService } from '../dataProvider.service';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
 //models
@@ -9,28 +9,26 @@ import { Issue } from '../models/issue'
   selector: 'app-columns',
   templateUrl: './columns.component.html',
   styleUrls: ['./columns.component.css'],
+  providers: [ DataProviderService ]
 })
 
 export class ColumnsComponent implements OnInit {
 
-  service = new DataProviderService;
-  dragula = new DragulaService;
-  drake:any;
+  // dragula = new DragulaService;
   
-  constructor(dataService: DataProviderService, dragula: DragulaService) { 
-    this.service = dataService;
-    this.dragula = dragula;
+  constructor(private dataService: DataProviderService, private dragula: DragulaService) { 
+    //this.dragula = dragula;
 
-    this.dragula.setOptions('issue-bag',{
+    dragula.setOptions('issue-bag',{
       accepts: (el: Element, target: Element, source: Element, sibling: Element): boolean => {
         return this.respectTransactionRules(source.id, target.id);
       }
     });
 
-
-    this.dragula.dropModel.subscribe((value) => {
+    dragula.dropModel.subscribe((value) => {
       this.onDrop(value);
    });
+
   }
 
   columns = [];
@@ -38,8 +36,8 @@ export class ColumnsComponent implements OnInit {
 
   ngOnInit() {
   	//requesting informations about columns
-    this.columns = this.service.fillColumns();
-
+    this.dataService.getTasks();
+    
     //creata a dictionary with name of columns -> their index
     for (let i in this.columns)
     {
@@ -47,8 +45,6 @@ export class ColumnsComponent implements OnInit {
 
       this.columns[i].bagName = this.columns[i].name + "-bag";
     }
-
-    console.log(this.columns);
   }
 
   sortColumn(id)

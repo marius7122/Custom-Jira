@@ -8,6 +8,7 @@ import { ColumnsComponent } from './columns/columns.component';
 import { TaskComponent } from './task/task.component';
 import { DataProviderService } from './dataProvider.service';
 import { DragulaModule } from 'ng2-dragula';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { DragulaModule } from 'ng2-dragula';
   ],
   imports: [
     BrowserModule,
-    DragulaModule
+    DragulaModule,
+    HttpClientModule
   ],
   providers: [DataProviderService],
   bootstrap: [AppComponent]
