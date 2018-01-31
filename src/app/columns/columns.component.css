@@ -15,6 +15,7 @@ div.coloana{
 	max-height: 96vh;
 
 	overflow-y: auto; 
+	word-wrap: break-word;
 }
 
 .tasks{

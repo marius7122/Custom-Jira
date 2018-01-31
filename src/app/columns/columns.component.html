@@ -7,11 +7,11 @@
 	<!-- taskuri -->
 	<div class="tasks"  id ="{{column.name}}" [dragula] = "'issue-bag'" [dragulaModel] = "column.tasks">
 		<div *ngFor="let task of column.tasks">
-			<div class = "task" [ngClass] = "[(task.importance == 1) ? 'black':'', (task.importance == 2) ? 'red':'', (task.importance == 3) ? 'yellow':'', (task.importance == 4) ? 'green':'']">
-				<h6>{{task.title}}</h6>
+			<div class = "task" [ngClass] = "[(task.Importance == 1) ? 'black':'', (task.Importance == 2) ? 'red':'', (task.Importance == 3) ? 'yellow':'', (task.Importance == 4) ? 'green':'']">
+				<h6>{{task.IssueType}}</h6>
 				<hr>
-				<div class="description">{{task.description}}</div>
-				<div class="owner">Created by {{task.owner}}</div>
+				<div class="description">{{task.Sumary}}</div>
+				<div *ngIf="task.Owner" class="owner">Created by {{task.Owner}}</div>
 			</div>
 		</div>
 	</div>	
