@@ -159,7 +159,7 @@ export class ColumnsComponent implements OnInit {
     }
     if(id1 == 'review')
     {
-      return id2 == 'testUnassigned' || id2 == 'build' || id2 == 'buildUnassigned' || id2 == 'review';
+      return id2 == 'testUnassigned' || id2 == 'build' || id2 == 'buildUnassigned' || id2 == 'review' || id2 == 'reviewUnassigned';
     }
     if(id1 == 'testUnassigned')
     {
