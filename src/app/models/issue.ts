@@ -1,4 +1,5 @@
 export class Issue {
+    Id                  :number;
     Assignee            :string;
     Created             :string;
     Developer           :string;
@@ -11,12 +12,11 @@ export class Issue {
     OriginalEstimate    :string;
     Owner               :string;
     Priority            :string;
-    Remaining_Estimate  :string;
+    RemainingEstimate   :string;
     Status              :string;
     Sumary              :string;
     TimeSpent           :string;
     Updated             :string;
     WorkRatio           :string;
     Importance          :number;
-    Column              :string;
 }

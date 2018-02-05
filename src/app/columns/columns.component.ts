@@ -8,6 +8,7 @@ import { Column } from '../models/column';
 
 import { DataProviderService } from '../dataProvider.service';
 import { ArrayType } from '@angular/compiler/src/output/output_ast';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-columns',
@@ -23,7 +24,11 @@ export class ColumnsComponent implements OnInit {
 
     dragula.setOptions('issue-bag',{
       accepts: (el: Element, target: Element, source: Element, sibling: Element): boolean => {
-        return this.respectTransactionRules(source.id, target.id);
+        if(this.respectTransactionRules(source.id, target.id))
+        {
+          return true;
+        }
+        return false;
       }
     });
 
@@ -31,8 +36,12 @@ export class ColumnsComponent implements OnInit {
       this.onDrop(value);
    });
 
+    dragula.drop.subscribe((args) => {
+      
+    });
   }
 
+  issues = Array<Issue>();
   columns = Array<Column>(9);
   dict = [];
   statusToColumn = [];
@@ -47,7 +56,7 @@ export class ColumnsComponent implements OnInit {
     for(let i=0;i<9;i++)
     {
       this.columns[i] = new Column();
-      this.columns[i].name = 'do';
+      this.columns[i].name = '';
       this.columns[i].tasks = new Array<Issue>();
     }
 
@@ -94,21 +103,21 @@ export class ColumnsComponent implements OnInit {
   }
   putTasksInColumns(tasks:Issue[])
   {
-    this.createStatusToColumn();
-    
+    this.issues = tasks;
+
+    console.log(this.issues);
+
     let i;
     for(let task of tasks)
     {
-      task.Column = this.statusToColumn[task.Status];
-
-      if(task.Column === undefined)
-        i=0;
-      else
-        i = this.dict[task.Column];
-
       if(task.Importance === undefined)
         task.Importance = this.randomInt(1,4);
 
+
+      if(task.Importance == 0)
+        task.Importance = 5;
+
+      i = this.dict[task.Status];
       this.columns[i].tasks.push(task);
     }
   }
@@ -127,16 +136,29 @@ export class ColumnsComponent implements OnInit {
 
   onDrop(args)
   {
-    //args[2] = column where drop event is called
-    var id = args[2].id;
+    const [bagName, elSource, bagTarget, bagSource, elTarget] = args;
 
-    this.sortColumn(id);
+    //args[2] = column where drop event is called
+    var columnId = args[2].id;
+
+    //id of the element that was moved
+    var elementId = elSource.children[0].id;
+
+    //TO DO!!!
+    //send request to api to update element
+
+    this.sortColumn(columnId);
 
     //drag and drop in same column
     if(args[2].id == args[3].id)
     {
       this.dragula.find('issue-bag').drake.cancel(true);
     }
+  }
+
+  onDropModel(args: any): void {
+    let [el, target, source] = args;
+    let index = this.getElementIndex(el);
   }
 
   respectTransactionRules(id1,id2)
@@ -174,5 +196,9 @@ export class ColumnsComponent implements OnInit {
     {
       return id2 == 'test' || id2 == 'testUnassigned' || id2 == 'done' || id2 == 'verify';
     }
+  }
+
+  getElementIndex(el) {
+    return [].slice.call(el.parentElement.children).indexOf(el);
   }
 }
