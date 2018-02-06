@@ -50,15 +50,15 @@ h6{
 }
 
 .task{
-	min-height: 50px;
-
+	min-height: 50px; 
 	margin: 3px;
-
 	border: 1px solid black;
 }
 
 .description{
 	margin-bottom: 10px;
+	max-height: 7vh;
+	overflow-y: auto;
 }
 
 .owner{

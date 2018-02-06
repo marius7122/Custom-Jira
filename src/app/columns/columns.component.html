@@ -10,7 +10,7 @@
 			<div class = "task" id = "{{task.Id}}" (click)="clickOnIssue(task.Key);" [ngClass] = "[(task.Importance == 1) ? 'black':'', (task.Importance == 2) ? 'red':'', (task.Importance == 3) ? 'yellow':'', (task.Importance == 4) ? 'green':'']">
 				<h6>{{task.Key}}</h6>
 				<hr>
-				<div class="description">{{task.Sumary}}</div>
+				<div class="description min-scrollbar">{{task.Sumary}}</div>
 				<div *ngIf="task.Owner" class="owner">Created by {{task.Owner}}</div>
 			</div>
 		</div>
