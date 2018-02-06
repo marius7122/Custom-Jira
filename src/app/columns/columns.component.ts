@@ -45,6 +45,7 @@ export class ColumnsComponent implements OnInit {
   columns = Array<Column>(9);
   dict = [];
   statusToColumn = [];
+  doneColumnIsExpanded = false;
 
   ngOnInit() {
     //requesting informations about columns
@@ -207,5 +208,9 @@ export class ColumnsComponent implements OnInit {
     let navigateTo = jiraURL + issueKey;
 
     window.open(navigateTo);
+  }
+
+  taskAreVisible:boolean(columnName:string){
+    return false;
   }
 }

@@ -7,12 +7,20 @@
 	<!-- taskuri -->
 	<div class="tasks"  id ="{{column.name}}" [dragula] = "'issue-bag'" [dragulaModel] = "column.tasks">
 		<div *ngFor="let task of column.tasks">
-			<div class = "task" id = "{{task.Id}}" (click)="clickOnIssue(task.Key);" [ngClass] = "[(task.Importance == 1) ? 'black':'', (task.Importance == 2) ? 'red':'', (task.Importance == 3) ? 'yellow':'', (task.Importance == 4) ? 'green':'']">
-				<h6>{{task.Key}}</h6>
-				<hr>
-				<div class="description min-scrollbar">{{task.Sumary}}</div>
-				<div *ngIf="task.Owner" class="owner">Created by {{task.Owner}}</div>
+			<div *ngIf = "column.name != 'done' || doneColumnIsExpanded " >
+				<div class = "task" id = "{{task.Id}}" (click)="clickOnIssue(task.Key);" [ngClass] = "[(task.Importance == 1) ? 'black':'', (task.Importance == 2) ? 'red':'', (task.Importance == 3) ? 'yellow':'', (task.Importance == 4) ? 'green':'']">
+					<h6>{{task.Key}}</h6>
+					<hr>
+					<div class="description min-scrollbar">{{task.Sumary}}</div>
+					<div *ngIf="task.Owner" class="owner">Created by {{task.Owner}}</div>
+				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
+
+	<!-- toggle button for done column -->
+	<button *ngIf = "column.name == 'done'" class = "btn btn-light" id = "toggleButton" (click) = "doneColumnIsExpanded = !doneColumnIsExpanded">
+		<i *ngIf = "!doneColumnIsExpanded" class="glyphicon glyphicon-chevron-down"></i>
+		<i *ngIf = "doneColumnIsExpanded" class="glyphicon glyphicon-chevron-up"></i>
+	</button>
 </div>
