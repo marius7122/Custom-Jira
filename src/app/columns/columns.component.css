@@ -106,6 +106,49 @@ div .black{
 	outline: none;
 }
 
+#legend{
+	width: 9%;
+	height: 200px;
+
+	background: rgb(241, 241, 241);
+	
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+
+	z-index: 3;
+}
+
+#legend #right{
+	width: 50%;
+	float: left;
+
+	border-right: 1px solid rgb(170, 170, 170);
+
+	min-height: 50px;
+}
+
+#legend #left{
+	width:50%;
+	float: right;
+
+	min-height: 50px;
+}
+
+#legend h6{
+	height: 35px;
+	border-bottom: 1px solid rgb(170, 170, 170);
+}
+
+#legend .color{
+	width: 93%;
+	height: 1em;
+	margin-bottom: 7px;
+	margin-left: 4px;
+}
+
+
+
 /* DRAGULA CSS */
 .gu-mirror {
 	position: fixed !important;

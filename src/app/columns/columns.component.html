@@ -24,3 +24,29 @@
 		<i *ngIf = "doneColumnIsExpanded" class="glyphicon glyphicon-chevron-up"></i>
 	</button>
 </div>
+
+<!-- legend -->
+<div *ngIf = "!doneColumnIsExpanded" id = "legend">
+	<h5>Legend</h5>
+	<hr>
+
+	<div id="right">
+		<h6>Color</h6>
+
+		<div class="color">No Color</div>
+		<div class="color green"></div>
+		<div class="color yellow"></div>
+		<div class="color red"></div>
+		<div class="color black"></div>
+	</div>
+
+	<div id="left">
+		<h6>Time remaining</h6>
+
+		<div>Not asigned</div>
+		<div>>50%</div>
+		<div>25%-50%</div>
+		<div><25%</div>
+		<div>Time expired</div>
+	</div>
+</div>
