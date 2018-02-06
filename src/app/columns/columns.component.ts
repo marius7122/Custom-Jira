@@ -201,4 +201,11 @@ export class ColumnsComponent implements OnInit {
   getElementIndex(el) {
     return [].slice.call(el.parentElement.children).indexOf(el);
   }
+
+  clickOnIssue(issueKey:string){
+    let jiraURL = "https://jira.ortec.com/jira/browse/";
+    let navigateTo = jiraURL + issueKey;
+
+    window.open(navigateTo);
+  }
 }
