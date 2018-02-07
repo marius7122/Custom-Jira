@@ -12,7 +12,7 @@
 					<h6>{{task.Key}}</h6>
 					<hr>
 					<div class="description min-scrollbar">{{task.Sumary}}</div>
-					<div *ngIf="task.Owner" class="owner">Created by {{task.Owner}}</div>
+					<div *ngIf="showOwner(task)" class="owner">Assigned to {{task.Assignee}}</div>
 				</div>
 			</div>
 		</div>

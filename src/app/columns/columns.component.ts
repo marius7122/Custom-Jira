@@ -74,7 +74,7 @@ export class ColumnsComponent implements OnInit {
 
   randomInt(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
- }
+  }
 
   createStatusToColumn()
   {
@@ -143,15 +143,26 @@ export class ColumnsComponent implements OnInit {
     var columnId = args[2].id;
 
     //id of the element that was moved
-    var elementId = elSource.children[0].id;
+    // var elementId = elSource.children[0].id;
+    var elementId = this.getElementIndex(elSource);
+    
+
+    //update element status
+    this.issues[elementId].Status = columnId;
+    this.issues[elementId].Assignee = 'Robert';
+
+    //drag from assigned to unassigned
+    if(bagTarget.id.indexOf("Unassigned") != -1)
+      this.issues[elementId].Assignee = "unassigned";
 
     //TO DO!!!
     //send request to api to update element
 
+
     this.sortColumn(columnId);
 
     //drag and drop in same column
-    if(args[2].id == args[3].id)
+    if(bagTarget.id == bagSource.id)
     {
       this.dragula.find('issue-bag').drake.cancel(true);
     }
@@ -200,7 +211,22 @@ export class ColumnsComponent implements OnInit {
   }
 
   getElementIndex(el) {
-    return [].slice.call(el.parentElement.children).indexOf(el);
+    return el.children[0].firstElementChild.id;
+  }
+
+
+  showOwner(task:Issue){
+
+    if(task.Assignee == "unassigned")
+      return false;
+    else return true;
+
+    //for new version
+    if(task.Assignee=="unassigned" || task.Status == 'open' || task.Status.indexOf("Unassigned") == -1)
+      return false;
+
+    console.log("e ok!");
+    return true;
   }
 
   clickOnIssue(issueKey:string){
@@ -210,7 +236,4 @@ export class ColumnsComponent implements OnInit {
     window.open(navigateTo);
   }
 
-  taskAreVisible:boolean(columnName:string){
-    return false;
-  }
 }
