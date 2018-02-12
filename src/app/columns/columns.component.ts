@@ -145,21 +145,45 @@ export class ColumnsComponent implements OnInit {
     //id of the element that was moved
     // var elementId = elSource.children[0].id;
     var elementId = this.getElementIndex(elSource);
-    
+    var issueToUpdate = this.issues[elementId];
 
-    //update element status
-    this.issues[elementId].Status = columnId;
-    this.issues[elementId].Assignee = 'Robert';
+    if(bagTarget.id != bagSource.id)
+    {
+      //TO DO!!! Get Asignee from modal
+      //update element status
+      issueToUpdate.Status = columnId;
+      issueToUpdate.Assignee = 'Robert';
 
-    //drag from assigned to unassigned
-    if(bagTarget.id.indexOf("Unassigned") != -1)
-      this.issues[elementId].Assignee = "unassigned";
+      if(issueToUpdate.Status == "build")
+      {
+        issueToUpdate.MoveToBuild = this.getDate();
+      }
 
-    //TO DO!!!
-    //send request to api to update element
+      //drag from assigned to unassigned
+      if(bagTarget.id.indexOf("Unassigned") != -1)
+        issueToUpdate.Assignee = "unassigned";
+      
 
+      //send request to api to update element
+      let updatePromise = this.dataService.updateTaskInformation(this.issues[elementId]);
+      updatePromise.then((data) => {
 
-    this.sortColumn(columnId);
+        issueToUpdate = data as Issue;
+        this.issues[elementId] = data as Issue;
+
+        //update element from this.column
+        let columnIndex = this.dict[columnId]
+        for(let i in this.columns[columnIndex].tasks)
+          if(this.columns[columnIndex].tasks[i].Id == issueToUpdate.Id)
+          {
+            this.columns[columnIndex].tasks[i] = issueToUpdate;
+            console.log("succes!");
+          }
+        
+          this.sortColumn(columnId);
+      });
+
+    }
 
     //drag and drop in same column
     if(bagTarget.id == bagSource.id)
@@ -168,7 +192,8 @@ export class ColumnsComponent implements OnInit {
     }
   }
 
-  onDropModel(args: any): void {
+  onDropModel(args: any): void 
+  {
     let [el, target, source] = args;
     let index = this.getElementIndex(el);
   }
@@ -210,30 +235,54 @@ export class ColumnsComponent implements OnInit {
     }
   }
 
-  getElementIndex(el) {
+  getElementIndex(el) 
+  {
     return el.children[0].firstElementChild.id;
   }
 
 
-  showOwner(task:Issue){
+  showOwner(task:Issue)
+  {
 
     if(task.Assignee == "unassigned")
       return false;
     else return true;
-
-    //for new version
-    if(task.Assignee=="unassigned" || task.Status == 'open' || task.Status.indexOf("Unassigned") == -1)
-      return false;
-
-    console.log("e ok!");
-    return true;
   }
 
-  clickOnIssue(issueKey:string){
+  clickOnIssue(issueKey:string)
+  {
     let jiraURL = "https://jira.ortec.com/jira/browse/";
     let navigateTo = jiraURL + issueKey;
 
     window.open(navigateTo);
+  }
+
+  getDate()
+  {
+    let today = new Date();
+    let day = today.getDate() + "";
+    let month = (today.getMonth() + 1) + "";
+    let year = today.getFullYear() + "";
+    let hour = today.getHours() + "";
+    let minutes = today.getMinutes() + "";
+
+    day = this.checkZero(day);
+    month = this.checkZero(month);
+    year = this.checkZero(year);
+    hour = this.checkZero(hour);
+    minutes = this.checkZero(minutes);
+
+    let date = day + "/" + month + "/" + year + " " + hour + ":" + minutes;
+
+    return date;
+  }
+
+  checkZero(data)
+  {
+    if(data.length == 1){
+      data = "0" + data;
+    }
+    return data;
   }
 
 }

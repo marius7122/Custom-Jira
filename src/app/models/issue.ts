@@ -8,7 +8,7 @@ export class Issue {
     FixVersion          :string;
     IssueType           :string;
     Key                 :string;
-    LeadTime            :string;
+    LeadTime            :number;
     OriginalEstimate    :string;
     Owner               :string;
     Priority            :string;
@@ -19,4 +19,5 @@ export class Issue {
     Updated             :string;
     WorkRatio           :string;
     Importance          :number;
+    MoveToBuild         :string;
 }

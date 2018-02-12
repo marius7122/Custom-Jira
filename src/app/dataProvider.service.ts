@@ -30,4 +30,11 @@ export class DataProviderService{
 	{
 		return this.http.get(this.APIUrl + '/issues').toPromise();
 	}
+
+	updateTaskInformation(task:Issue)
+	{
+		let body = JSON.stringify(task);
+
+		return this.http.put(this.APIUrl + "/update", task).toPromise();
+	}
 }
