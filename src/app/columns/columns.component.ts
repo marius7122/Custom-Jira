@@ -47,6 +47,10 @@ export class ColumnsComponent implements OnInit {
   statusToColumn = [];
   doneColumnIsExpanded = false;
 
+  //modal data
+  savedArgs = [];
+  assignee = '';
+
   ngOnInit() {
     //requesting informations about columns
     this.readColumns();
@@ -139,6 +143,18 @@ export class ColumnsComponent implements OnInit {
   {
     const [bagName, elSource, bagTarget, bagSource, elTarget] = args;
 
+    //if i drop from unassigned to assigned
+    if(bagSource.id == 'open' || bagSource.id.indexOf('Unassigned') != -1 && (bagSource.id != bagTarget.id))
+      this.openModal('assign-modal', args);
+
+    else
+      this.taskMoveAction(args, 'unassigned');
+  }
+
+  taskMoveAction(args, assignee)
+  {
+    const [bagName, elSource, bagTarget, bagSource, elTarget] = args;
+
     //args[2] = column where drop event is called
     var columnId = args[2].id;
 
@@ -149,19 +165,14 @@ export class ColumnsComponent implements OnInit {
 
     if(bagTarget.id != bagSource.id)
     {
-      //TO DO!!! Get Asignee from modal
       //update element status
       issueToUpdate.Status = columnId;
-      issueToUpdate.Assignee = 'Robert';
+      issueToUpdate.Assignee = assignee;
 
       if(issueToUpdate.Status == "build")
       {
         issueToUpdate.MoveToBuild = this.getDate();
       }
-
-      //drag from assigned to unassigned
-      if(bagTarget.id.indexOf("Unassigned") != -1)
-        issueToUpdate.Assignee = "unassigned";
       
 
       //send request to api to update element
@@ -169,18 +180,9 @@ export class ColumnsComponent implements OnInit {
       updatePromise.then((data) => {
 
         issueToUpdate = data as Issue;
-        this.issues[elementId] = data as Issue;
+        this.modifyIssue(issueToUpdate);
 
-        //update element from this.column
-        let columnIndex = this.dict[columnId]
-        for(let i in this.columns[columnIndex].tasks)
-          if(this.columns[columnIndex].tasks[i].Id == issueToUpdate.Id)
-          {
-            this.columns[columnIndex].tasks[i] = issueToUpdate;
-            console.log("succes!");
-          }
-        
-          this.sortColumn(columnId);
+        this.sortColumn(columnId);
       });
 
     }
@@ -190,6 +192,21 @@ export class ColumnsComponent implements OnInit {
     {
       this.dragula.find('issue-bag').drake.cancel(true);
     }
+  }
+
+  modifyIssue(issueToModify:Issue)
+  {
+    let elementId = issueToModify.Id;
+
+    this.issues[elementId] = issueToModify;
+
+    //update element from this.column
+    let columnIndex = this.dict[issueToModify.Status];
+    for(let i in this.columns[columnIndex].tasks)
+      if(this.columns[columnIndex].tasks[i].Id == issueToModify.Id)
+      {
+        this.columns[columnIndex].tasks[i] = issueToModify;
+      }
   }
 
   onDropModel(args: any): void 
@@ -235,7 +252,7 @@ export class ColumnsComponent implements OnInit {
     }
   }
 
-  getElementIndex(el) 
+  getElementIndex(el)
   {
     return el.children[0].firstElementChild.id;
   }
@@ -283,6 +300,22 @@ export class ColumnsComponent implements OnInit {
       data = "0" + data;
     }
     return data;
+  }
+
+  openModal(modalId, args)
+  {
+    this.savedArgs = args;
+
+    let jqueryObj = $('#'+modalId);
+    jqueryObj.modal('show');
+  }
+
+  closeModal(modalId)
+  {
+    let jqueryObj = $('#assign-modal');
+    jqueryObj.modal('hide');
+    
+    this.taskMoveAction(this.savedArgs, this.assignee);
   }
 
 }
