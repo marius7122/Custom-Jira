@@ -2,6 +2,12 @@
 
 <div class="container coloana min-scrollbar" *ngFor="let column of columns">
 	<h5>{{column.displayName}}</h5>
+	<!-- toggle button for done column -->
+	<div *ngIf = "column.name == 'done'" id = "toggleButton" (click) = "doneColumnIsExpanded = !doneColumnIsExpanded">
+		<i *ngIf = "!doneColumnIsExpanded" class="glyphicon glyphicon-chevron-down"></i>
+		<i *ngIf = "doneColumnIsExpanded" class="glyphicon glyphicon-chevron-up"></i>
+	</div>
+
 	<hr>
 
 	<!-- taskuri -->
@@ -17,12 +23,6 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- toggle button for done column -->
-	<button *ngIf = "column.name == 'done'" class = "btn btn-light" id = "toggleButton" (click) = "doneColumnIsExpanded = !doneColumnIsExpanded">
-		<i *ngIf = "!doneColumnIsExpanded" class="glyphicon glyphicon-chevron-down"></i>
-		<i *ngIf = "doneColumnIsExpanded" class="glyphicon glyphicon-chevron-up"></i>
-	</button>
 </div>
 
 <!-- legend -->

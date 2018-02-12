@@ -66,8 +66,8 @@ h6{
 }
 
 div .green{
-	background-color: rgb(18, 202, 1);
-	color: white;
+	background-color: #00cc00;
+	color: black;
 }
 div .yellow{
 	background-color: yellow;
@@ -98,10 +98,17 @@ div .black{
 #done{
 	min-height: 7vh;
 }
+#done h5{
+	display: flex;
+}
 
 #toggleButton{
-	width: 100%;
+	width: 25%;
 	height: 3vh;
+
+	position: absolute;
+	top: 0.5em;
+	right: 0;
 
 	outline: none;
 }
